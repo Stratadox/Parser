@@ -37,9 +37,9 @@ final class Between
         string $escape2 = null,
     ): Parser {
         return Between::these($from, $to, Join::the(Repeatable::parser(AllOrNothing::in(Either::of(
-            Map::the(($escape2 ?: $escape) . $escape, fn($x) => $escape),   // escaped escape
-            Join::the(Sequence::of(Ignore::the($escape), $to)),             // escaped end
-            Except::for($to, Any::symbol()),                                // anything else
+            Map::the(($escape2 ?: $escape) . $escape, fn() => $escape), // escaped escape
+            Join::the(Sequence::of(Ignore::the($escape), $to)),         // escaped end
+            Except::for($to, Any::symbol()),                            // anything else
         )))));
     }
 }
