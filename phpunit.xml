@@ -23,6 +23,7 @@
         </include>
         <report>
             <text outputFile="php://stdout" />
+            <clover outputFile="build/logs/clover.xml"/>
         </report>
     </coverage>
 
