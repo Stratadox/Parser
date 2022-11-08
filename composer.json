@@ -1,0 +1,36 @@
+{
+  "name": "stratadox/parser",
+  "description": "Parser combinator library",
+  "keywords": [
+    "parser", "combinator", "library",
+    "parsing", "expression", "language",
+    "DSL", "interpreter",
+    "custom", "AST", "builder"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Stratadox",
+      "homepage": "https://www.stratadox.com/"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Stratadox\\Parser\\": "src"
+    },
+    "files": ["src/functions.php"]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Stratadox\\Parser\\Test\\": "tests"
+    }
+  },
+  "require": {
+    "php": ">=8.0",
+    "ext-mbstring": "*"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-master",
+    "phpunit/phpunit": "^9.5"
+  }
+}
