@@ -1,5 +1,8 @@
 # Parser Combinator
 
+[![Github Action](https://github.com/Stratadox/Parser/actions/workflows/php.yml/badge.svg)](https://github.com/Stratadox/Parser/actions/workflows/php.yml)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Stratadox/Parser/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/Stratadox/Parser/?branch=main)
+
 *Simple Yet Powerful Parsing Library.*
 
 ## What is this
