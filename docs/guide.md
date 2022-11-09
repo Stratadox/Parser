@@ -19,12 +19,12 @@ For the details of each individual parser, see [the reference](reference.md).
   - [3.1: Mapping the result data](#31-mapping-the-result-data)
   - [3.2: Joining the resulting array](#32-joining-the-resulting-array)
   - [3.3: At least 2](#33-at-least-2)
+- [Chapter 4: Between](#chapter-4-between)
+  - [4.1: Between spaces](#41-between-spaces) 
+  - [4.2: Between escapable quotes](#42-between-escapable-quotes)
 
 Todo:
 
-- [Chapter 4: Between](#chapter-4-between)
-  - [4.1: Between braces](#41-between-braces) 
-  - [4.2: Between escapable quotes](#42-between-escapable-quotes)
 - [Chapter 5: Splitting](#chapter-5-splitting)
   - [5.1: Optional split](#51-optional-split)
   - [5.2: Mandatory split](#52-mandatory-split)
@@ -520,15 +520,80 @@ least five of them.
 
 ## Chapter 4: Between
 
-Todo
+The [previous chapter](#chapter-3-mapping) was all about mapping.
+In this chapter, we'll discuss two distinct techniques for parsing content that 
+occurs between a start and an end.
 
-### 4.1: Between braces
+The parsers used below are also available as [unit test](../tests/Guide/Chapter_4_Between.php).
 
-Todo
+### 4.1: Between spaces
+
+Previously, we've used a mapping with `trim` to get rid of the whitespaces that 
+surround the parts we're interested in.
+A more elegant way to achieve the same, is by declaring that our verbs are to be 
+found [*between*](reference.md#between) spaces:
+
+```php
+<?php
+use Stratadox\Parser\Parsers\Ignore;
+use function Stratadox\Parser\any;
+use function Stratadox\Parser\text;
+
+$greeting = text("Hello")->or("Hi", "Hey there")->andThen(Ignore::the(','));
+$verb = text("my name is")->or("I'm called", "I'm")->between(' ');
+$suffix = text(". :)")->or("!")->maybe()->end();
+$name = any()->except($suffix)->repeatableString();
+$introduction = $greeting->andThen($verb, $name, $suffix);
+
+$result = $introduction->parse("Hello, my name is Alice");
+
+assert(["Hello", "my name is", "Alice"] === $result->data());
+```
+
+The [between](reference.md#between) helper is also very helpful for recognizing 
+e.g. content between braces: `$content->between('(', ')')`. 
+
+Since the start and end markers are themselves also parsers, we can also do this, 
+for example:
+
+```php
+<?php
+use function Stratadox\Parser\pattern;
+use function Stratadox\Parser\text;
+
+$parser = text('content')->between(pattern('[({]'), text(')')->or('}'));
+
+$result1 = $parser->parse('{content}');
+
+assert('content' === $result1->data());
+
+$result2 = $parser->parse('(content)');
+
+assert('content' === $result1->data());
+```
 
 ### 4.2: Between escapable quotes
 
-Todo
+Oftentimes in parsing, we're dealing with content between quotes that can be 
+*escaped* with some escape character. (commonly ` \ `)
+
+This library provides an easy helper for exactly that use case: the [*between 
+escaped*](reference.md#between-escaped) parser.
+
+```php
+<?php
+use Stratadox\Parser\Helpers\Between;
+
+$parser = Between::escaped('"', '"', '\\');
+
+$result1 = $parser->parse('"Regular text between quotes"');
+
+assert('Regular text between quotes' === $result1->data());
+
+$result2 = $parser->parse('"Text with \\"escaped\\" quotes"');
+
+assert('Text with "escaped" quotes' === $result2->data());
+```
 
 ## Chapter 5: Splitting
 

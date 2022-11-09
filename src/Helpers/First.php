@@ -6,6 +6,11 @@ use Stratadox\Parser\Parser;
 use Stratadox\Parser\Parsers\Map;
 use function is_array;
 
+/**
+ * First
+ *
+ * Transforms an array result into its first item.
+ */
 final class First
 {
     public static function of(Parser $parser): Parser

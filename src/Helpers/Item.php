@@ -6,6 +6,11 @@ use Stratadox\Parser\Parser;
 use Stratadox\Parser\Parsers\Map;
 use function is_array;
 
+/**
+ * Item
+ *
+ * Transforms an array result into its nth item.
+ */
 final class Item
 {
     public static function number(int|string $n, Parser $parser): Parser

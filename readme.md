@@ -25,8 +25,13 @@ interpret existing file formats or languages... This library is here to help.
 
 ## How to use this
 
-What follows is a short overview of the contents, for hands on how-tos, see the 
-[guide](docs/guide.md).
+For hands on how-tos, see the [guide](docs/guide.md).
+
+### Installation
+
+Using composer: `composer install stratadox/parser`
+
+### Overview 
 
 There's 3 base parsers: `any`, `text` and `pattern`.
 - [*Any*](docs/reference.md#any-symbol) matches any single character.
@@ -71,6 +76,8 @@ There's several additional helpers, which are essentially mapping shortcuts:
 - [*Non-Empty*](docs/reference.md#non-empty) refuses `empty` results.
 - [*At Least*](docs/reference.md#at-least) refuses arrays with fewer than x entries.
 - [*At Most*](docs/reference.md#at-most) refuses arrays with more than x entries.
+- [*First*](docs/reference.md#first) transforms an array result into its first item.
+- [*Item*](docs/reference.md#item) transforms an array result into its nth item.
 
 To enable lazy parsers (and/or to provide a structure), different containers are 
 available:

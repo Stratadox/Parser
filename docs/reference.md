@@ -2,6 +2,8 @@
 
 Reference for the parser combinator library.
 
+For practical hands-on tips and tricks, see the [guide](guide.md).
+
 ## Base Parsers
 
 These are the foundation of the whole thing. 
@@ -1342,6 +1344,52 @@ $result = $parser->parse('abc');
 
 assert(true === $result->ok());
 assert('abc' === $result->data());
+```
+
+### First
+
+Transforms an array result into its first item.
+
+#### Usage
+
+Using named constructor:
+
+```php
+use Stratadox\Parser\Helpers\First;
+use Stratadox\Parser\Parsers\Sequence;
+
+$parser = First::of(Sequence::of('a', 'b', 'c'));
+```
+
+Using method:
+
+```php
+use Stratadox\Parser\Parsers\Sequence;
+
+$parser = Sequence::of('a', 'b', 'c')->first();
+```
+
+### Item
+
+Transforms an array result into its nth item.
+
+#### Usage
+
+Using named constructor:
+
+```php
+use Stratadox\Parser\Helpers\Item;
+use Stratadox\Parser\Parsers\Sequence;
+
+$parser = Item::number(2, Sequence::of('a', 'b', 'c'));
+```
+
+Using method:
+
+```php
+use Stratadox\Parser\Parsers\Sequence;
+
+$parser = Sequence::of('a', 'b', 'c')->item(2);
 ```
 
 ### Non-empty
