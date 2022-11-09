@@ -29,7 +29,7 @@ For hands on how-tos, see the [guide](docs/guide.md).
 
 ### Installation
 
-Using composer: `composer install stratadox/parser`
+Using composer: `composer require stratadox/parser`
 
 ### Overview 
 
