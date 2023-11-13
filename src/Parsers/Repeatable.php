@@ -28,7 +28,6 @@ final class Repeatable extends Parser
         $unparsed = $input;
         while (true) {
             $result = $this->parser->parse($unparsed);
-            $unparsed = $result->unparsed();
 
             if ($result->use()) {
                 $results[] = $result->data();
@@ -37,6 +36,8 @@ final class Repeatable extends Parser
             if (!$result->ok()) {
                 return Ok::with($results, $unparsed);
             }
+
+            $unparsed = $result->unparsed();
         }
     }
 }

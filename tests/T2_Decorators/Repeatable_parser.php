@@ -104,4 +104,16 @@ final class Repeatable_parser extends TestCase
         self::assertEquals('aaa', $result->data());
         self::assertEquals('', $result->unparsed());
     }
+
+    /** @test */
+    function any_number_of_the_sequence_with_space_in_a_text()
+    {
+        $parser = Text::is(' x')->repeatable();
+
+        $result = $parser->parse(' x x y x');
+
+        self::assertTrue($result->ok());
+        self::assertEquals([' x', ' x'], $result->data());
+        self::assertEquals(' y x', $result->unparsed());
+    }
 }
